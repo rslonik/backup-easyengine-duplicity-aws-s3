@@ -10,7 +10,7 @@ if [ ! $? -eq 0 ]; then
   echo
   apt-add-repository ppa:duplicity-team/ppa
   apt-get update
-  apt-get install duplicity python-pip -y
+  apt-get install duplicity python-pip mailutils -y
   pip install boto
 fi
 
