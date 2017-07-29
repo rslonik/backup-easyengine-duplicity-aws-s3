@@ -1,12 +1,13 @@
 #!/bin/bash
 
+THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source ${THISPATH}/config.sh
+
 ### UTILS ###
 # Incluir qualquer coisa na cron
 # Uso: GenCron "script.sh" "minuto" "hora" "dia_semana"
 GenCron(){
-  SCRIPTDIR=$(ScriptDir);
-
-  SCRIPT="${SCRIPTDIR}${1}"
+  SCRIPT="${THISPATH}${1}"
   if ! crontab -l | grep "$SCRIPT"; then
     LINHACRON="$2 $3 * * $4 /bin/bash $SCRIPT";
     TEMPCRON=`mktemp`;
@@ -17,9 +18,6 @@ GenCron(){
   fi
 }
 ### ###
-
-THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source ${THISPATH}/config.sh
 
 duplicity --version
 if [ ! $? -eq 0 ]; then
