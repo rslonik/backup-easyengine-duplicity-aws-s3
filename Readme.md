@@ -1,7 +1,8 @@
 # BACKUP
 
-TODO:
+How to use
+-------------
 
-* CHECAR E INSTALAR O MYSQLDUMP NA CRON
+* bash backup.sh (will install Duplicity and Cron jobs).
 
-* CHECAR E INSTALAR DUPLICITY
+* That's all. It will do a full backup every 30 days, with incremental every day.
