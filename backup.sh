@@ -1,5 +1,23 @@
 #!/bin/bash
 
+### UTILS ###
+# Incluir qualquer coisa na cron
+# Uso: GenCron "script.sh" "minuto" "hora" "dia_semana"
+GenCron(){
+  SCRIPTDIR=$(ScriptDir);
+
+  SCRIPT="${SCRIPTDIR}${1}"
+  if ! crontab -l | grep "$SCRIPT"; then
+    LINHACRON="$2 $3 * * $4 /bin/bash $SCRIPT";
+    TEMPCRON=`mktemp`;
+    crontab -l > $TEMPCRON;
+    echo "$LINHACRON > /dev/null" >> $TEMPCRON;
+    crontab $TEMPCRON;
+    rm -f $TEMPCRON;
+  fi
+}
+### ###
+
 THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${THISPATH}/config.sh
 
@@ -94,22 +112,3 @@ if [ $is_running -eq 0 ]; then
     unset AWS_ACCESS_KEY_ID
     unset AWS_SECRET_ACCESS_KEY
 fi
-
-### UTILS ###
-# Incluir qualquer coisa na cron
-# Uso: GenCron "script.sh" "minuto" "hora" "dia_semana"
-GenCron(){
-  SCRIPTDIR=$(ScriptDir);
-
-  SCRIPT="${SCRIPTDIR}${1}"
-  if ! crontab -l | grep "$SCRIPT"; then
-    LINHACRON="$2 $3 * * $4 /bin/bash $SCRIPT";
-    TEMPCRON=`mktemp`;
-    crontab -l > $TEMPCRON;
-    echo "$LINHACRON > /dev/null" >> $TEMPCRON;
-    crontab $TEMPCRON;
-    rm -f $TEMPCRON;
-  fi
-}
-### ###
-
