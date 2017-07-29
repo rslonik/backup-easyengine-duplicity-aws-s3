@@ -104,6 +104,7 @@ if [ $is_running -eq 0 ]; then
 
     # Append the daily log file to the main log file
     cat "$DAILYLOGFILE" >> $LOGFILE
+    cat $DAILYLOGFILE
 
     # Reset the ENV variables. Don't need them sitting around
     unset AWS_ACCESS_KEY_ID
