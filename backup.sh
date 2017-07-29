@@ -7,9 +7,8 @@ source ${THISPATH}/config.sh
 # Incluir qualquer coisa na cron
 # Uso: GenCron "script.sh" "minuto" "hora" "dia_semana"
 GenCron(){
-  SCRIPT="${THISPATH}${1}"
-  if ! crontab -l | grep "$SCRIPT"; then
-    LINHACRON="$2 $3 * * $4 /bin/bash $SCRIPT";
+  if ! crontab -l | grep "$1"; then
+    LINHACRON="$2 $3 * * $4 /bin/bash $1";
     TEMPCRON=`mktemp`;
     crontab -l > $TEMPCRON;
     echo "$LINHACRON > /dev/null" >> $TEMPCRON;
