@@ -1,6 +1,18 @@
 #!/bin/bash
 
-source /usr/local/sbin/config.sh
+duplicity --version
+if [ ! $? -eq 0 ]; then
+  echo
+  echo "Installing Duplicity"
+  echo
+  apt-add-repository ppa:duplicity-team/ppa
+  apt-get update
+  apt-get install duplicity python-pip -y
+  pip install boto
+fi
+
+THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source ${THISPATH}/config.sh
 
 # Set up some variables for logging
 LOGFILE="/var/log/duplicity/backup.log"

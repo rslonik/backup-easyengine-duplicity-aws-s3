@@ -1,6 +1,7 @@
 #!/bin/sh
 
-source /usr/local/sbin/config.sh
+THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source ${THISPATH}/config.sh
 
 LOGFILE="/var/log/duplicity/mysqldump.log"
 DATE=`date +%Y-%m-%d`

@@ -1,5 +1,7 @@
 #!/bin/bash
-source /usr/local/sbin/config.sh
+
+THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source ${THISPATH}/config.sh
 
 if [ $# -lt 3 ]; then echo "Usage $0 <date> <file> <restore-to>"; exit; fi
 

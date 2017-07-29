@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source /usr/local/sbin/config.sh
+THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source ${THISPATH}/config.sh
 
 duplicity verify -v4 ${DEST} ${SOURCE}\
     --include=/var/www \
