@@ -31,6 +31,7 @@ fi
 
 GenCron "${THISPATH}/mysqldump.sh" 0 3 '*'
 GenCron "${THISPATH}/backup.sh" 0 4 '*'
+GenCron "${THISPATH}/check_backup.sh" 0 5 '*'
 
 # Set up some variables for logging
 LOGFILE="/var/log/duplicity/backup.log"
