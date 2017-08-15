@@ -88,6 +88,7 @@ if [ $is_running -eq 0 ]; then
         ${FULL} \
         --no-encryption \
         --include=/var/www \
+        --include=/mnt/vdb/uploads \
         --exclude=/** \
         ${SOURCE} ${DEST} >> ${DAILYLOGFILE} 2>&1
 

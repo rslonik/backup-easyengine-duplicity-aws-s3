@@ -17,7 +17,7 @@ fi
 for SITE in $(ee site list | grep -v example.com | sort | sed 's/\x1B\[[0-9;]*[JKmsu]//g')
 	do
 		DBNAME=$(cat /var/www/$SITE/wp-config.php | grep DB_NAME | cut -d"'" -f4)
-		mysqldump -u root $DBNAME | gzip > /var/www/$SITE/$DBNAME.sql.gz
+		/usr/bin/mysqldump -u root $DBNAME | gzip > /var/www/$SITE/$DBNAME.sql.gz
 		if [ ! $? -eq 0 ]; then
 			echo "[ERROR]" $DATE $SITE >> $LOGFILE
 			cat $LOGFILE | mail -s "Mysqldump Error for- $DATE" $MAILADDR
