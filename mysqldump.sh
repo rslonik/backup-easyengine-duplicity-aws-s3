@@ -1,9 +1,12 @@
-#!/bin/sh
-
+#!/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+LOGFILE="/var/log/duplicity/mysqldump.log"
 THISPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo 'mysqldump' >> $LOGFILE
+
 source ${THISPATH}/config.sh
 
-LOGFILE="/var/log/duplicity/mysqldump.log"
 DATE=`date +%Y-%m-%d`
 
 if [ ! -d /var/log/duplicity ];then
@@ -16,6 +19,7 @@ fi
 
 for SITE in $(ee site list | grep -v example.com | sort | sed 's/\x1B\[[0-9;]*[JKmsu]//g')
 	do
+		echo $SITE >> $LOGFILE
 		DBNAME=$(cat /var/www/$SITE/wp-config.php | grep DB_NAME | cut -d"'" -f4)
 		/usr/bin/mysqldump -u root $DBNAME | gzip > /var/www/$SITE/$DBNAME.sql.gz
 		if [ ! $? -eq 0 ]; then
